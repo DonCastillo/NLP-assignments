@@ -18,12 +18,6 @@ def get_array_of_tokens(fileName):
 script = get_array_of_tokens('./script.in')
 question = get_array_of_tokens('./question.in')
 answerKey = get_array_of_tokens('./answer.in')
-# print(script)
-# print()
-# print(question)
-# print()
-# print(answerKey)
-# print()
 
 
 # get all the student answers from script

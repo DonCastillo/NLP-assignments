@@ -1,37 +1,45 @@
-# Assignment 1 -- Programming Part [20 points]
+# Natural Language Processing Assignments
 
-Given you have:
- * a fill-in the gap question file *question.in* that contains a text with some gaps,
- * a student script that contains the student answers *script.in* file with the gaps in the text filled, and
- * the *answer.in* file that contains the list of tokens to be placed in the gaps in the order of their appearance in *question.in*. Those tokens are stemmed using the Porter's stemmer.
+## 1. Porter Stemmer
+Checks if the words filled out in the script.in file matches the stem of words in the answer.in file using the Porter Stemmer module in Python.
 
-Write a Python program *a1.py* that checks the student script. Each answer token is worth 1 point. Your program should extract from the student script the answers and compare them with the list of tokens in the *answer.in* file.
+to run: ``python porter-stemmer.py``
 
+[Porter Stemmer](./screenshots/porter-stemmer.PNG)
 
-# Assignment 2 [45 points]
-# Due on February 26, 2021 by midnight
+## 2. Shannon Sentence Generator
+Generates random sentence using bigram and trigram, following Shannon Visualization Method.
 
-# shannon.py [15 points]
-Using a language model generated from the Brown corpus which is available in NLTK, write a Python program *shannon.py* that generates random sentences (i.e., Shannon Visualization Method) using:
- * bigrams
- * trigrams
+to run: ``python shannon.py``
 
-# classify.py [30 points]
- Using the Movie Reviews corpus available in NLTK, write a Python program *classify.py* that classify movies according to their sentiment polarity, and evaluate your program. You should use the Naive Bayes classifier, and split the data into training and testing (e.g., 70\% and 30\%).
+[Shannon](./screenshots/shannon.PNG)
 
-# Assignment 3  [40 points]
-# Due on March 26, 2021 by midnight
+## 3. Naive Bayes Classifier
+Classifies movie reviews according to their sentiment polarity using Naive Bayes classifier.
 
-# compare.py [20 points]
-Given 2 text documents, write your own function that computes the similarity between the 2 documents using the cosine similarity measure. The documents are represented using the TF-IDF.  Apply your function to the Movie Review corpus to compute the average similarity of the positive and the negative reviews.
+to run: ``python naive-bayes.py``
 
+[Naive Bayes](./screenshots/naive-bayes.PNG)
 
-# classify.py [20 points]
-Using the Movie Reviews corpus available in NLTK, write a program *classify.py* that classify movies according to their sentiment polarity, and evaluate your program. You should use the logistic regression as a classifier.
+## 4. Logistic Regression Classifier
+Classifies movie reviews according to their sentiment polarity using Logistic Regression.
 
-# Assignment 4  [40 points]
-# Due on April 9, 2021 by midnight
+to run: ``python logistic-regression.py``
 
-# classify.py [40 points]
-Using the Movie Review corpus, write a program that classify reviews according to their positive/negative polarity, and evaluate the results of your program. You should use Word2Vec to represent the words, and the Multi-layer neural network classifier (about 10 hidden layers with 5 units each). You should split the data into training and testing (e.g., 90\% and 10\%).
+[Logistic Regression](./screenshots/logistic-regression.PNG)
+
+## 5. Cosine Similarity Comparer
+Compares two documents and determines how similar they are. The closer the cosine value to 1 is, the more the documents are similar.
+
+to run: ``python cos-similarity.py``
+
+[Cosine Similarity](./screenshots/cosine-similarity.PNG)
+
+## 6. Multi-layer Neural Network Classifier
+Classifies movie reviews according to their sentiment polarity using Multi-layer Neural Network, with 10 hidden layers and 5 units each layer.
+
+to run: ``python neural-network.py``
+
+[Neural Network](./screenshots/neural-network.PNG)
+
 
