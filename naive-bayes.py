@@ -15,13 +15,6 @@ from nltk.corpus import movie_reviews, stopwords
 
 
 def clean_document(word_list):
-    """removes all unimportant words like punctuations and stopwords
-
-    :param word_list: list of words
-    :type word_list: list
-    :return: clean list of words
-    :rtype: list
-    """
     word_list_temp = []
     for word in word_list:
         if (word not in stopwords.words("english")) and (word not in string.punctuation):
@@ -30,13 +23,6 @@ def clean_document(word_list):
 
 
 def get_all_documents(corpus):
-    """get all documents with associated category
-
-    :param corpus: corpus
-    :type corpus: corpus
-    :return: list of tuples in a format: ([document's list of words], category)
-    :rtype: list
-    """
     all_documents_temp = []
     for category in corpus.categories():
         for fileid in corpus.fileids(category):
@@ -46,15 +32,6 @@ def get_all_documents(corpus):
 
 
 def get_top_unique_words(corpus, n):
-    """list the most frequent unique words
-
-    :param corpus: corpus
-    :type corpus: corpus
-    :param n: only consider the first n in the list
-    :type n: int
-    :return: list of words
-    :rtype: list
-    """
     unique_words = list(FreqDist([word.lower()
                                   for word in corpus.words()]))[:n]
     unique_words = clean_document(unique_words)
@@ -67,13 +44,6 @@ def main():
     top_unique_words = get_top_unique_words(movie_reviews, 2000)
 
     def document_features(document):
-        """checks if the top words in the corpus exists in the document
-
-        :param document: document to be examined
-        :type document: list
-        :return: set that lists the occurrences of the words in the documents 
-        :rtype: set
-        """
         document_uniq_word = set(document)
         features = {}
         for word in top_unique_words:

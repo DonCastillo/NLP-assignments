@@ -18,20 +18,12 @@ END_TOKEN = "</s>"
 
 class Corpus:
     def __init__(self):
-        """initializes the corpus"""
         corpus = brown.sents(fileids=["ca16"])
         corpus = self.__augment_corpus(corpus)
         corpus = self.__flatten_corpus(corpus)
         self.corpus = corpus
 
     def __flatten_corpus(self, corpus):
-        """put the nested sentence lists to a single containing list
-
-        :param corpus: corpus
-        :type corpus: corpus
-        :return: list of words
-        :rtype: list
-        """
         temp_corpus = []
         for sen in corpus:
             for word in sen:
@@ -39,15 +31,6 @@ class Corpus:
         return temp_corpus
 
     def __augment_corpus(self, corpus):
-        """identify sentence boundary by adding special token
-        before and after the sentence
-
-        :param corpus: corpus
-        :type corpus: corpus
-        :return: list of sentence, each prepended and appended by
-        special tokens
-        :rtype: list
-        """
         temp_corpus = []
         for sen in corpus:
             sen.append(END_TOKEN)
@@ -56,38 +39,17 @@ class Corpus:
         return temp_corpus
 
     def get_corpus(self):
-        """returns the final version of the corpus
-
-        :return: corpus
-        :rtype: corpus
-        """
         return list(self.corpus)
 
 
 class N_GramModel:
     def __init__(self, corpus, n_gram):
-        """initializes the corpus and produces the ngram 
-        version of the corpus
-
-        :param corpus: corpus
-        :type corpus: corpus
-        :param n_gram: number of words in an ngram tuple
-        :type n_gram: int
-        """
         self.corpus = list(corpus)
         self.ngram_list = list(ngrams(corpus, n_gram))
         self.ngram_seq = []
         self.n = n_gram
 
     def __freq_context(self, prev_words):
-        """counts the frequency of the previous group of 
-        words in the list of ngram tuples of the corpus
-
-        :param prev_words: previous words (context) of the word being predicted
-        :type prev_words: tuple
-        :return: frequency of the group of words
-        :rtype: int
-        """
         freq = 0
         for tup in self.ngram_list:
             if prev_words == tup[0:self.n - 1]:
@@ -95,15 +57,6 @@ class N_GramModel:
         return freq
 
     def __get_next_tuple(self, prev_tuple):
-        """return a random tuple whose first words matches 
-        the last words of the previous tuple passed.
-
-        :param prev_tuple: previous tuple
-        :type prev_tuple: tuple
-        :return: tuple whose first words matches 
-        the last words of the previous tuple
-        :rtype: tuple
-        """
         prev_words = prev_tuple[1:]  # (a, b, c, d, e) => (b, c, d, e)
         self.ngram_dict = {}
 
@@ -124,11 +77,6 @@ class N_GramModel:
         return shuffled[0]
 
     def __get_first_tuple(self):
-        """randomly selects a tuple whose first word is a starting token
-
-        :return: randomly selected starting tuple
-        :rtype: tuple
-        """
         starting_tuples = []
         for tup in self.ngram_list:
             if tup[0] == STR_TOKEN:
@@ -137,15 +85,6 @@ class N_GramModel:
         return starting_tuples[r]
 
     def __make_sentence(self, ngram_seq):
-        """constructs a sentence from a list of tuples 
-
-        :param ngram_seq: list of tuples where
-        the last words of each tuple matches the first words
-        of the next adjacent tuple
-        :type ngram_seq: list
-        :return: sentence
-        :rtype: string
-        """
         sentence_list = []
         for i, v in enumerate(ngram_seq):
             if i == 0:
@@ -158,11 +97,6 @@ class N_GramModel:
         return sentence
 
     def generate_random_sentence(self):
-        """generate a random sentence 
-
-        :return: sentence
-        :rtype: string
-        """
         self.ngram_seq.append(self.__get_first_tuple())
         while(True):
             prev_tuple = self.ngram_seq[len(self.ngram_seq) - 1]
@@ -177,11 +111,6 @@ class N_GramModel:
         return self.__make_sentence(self.ngram_seq)
 
     def get_ngram(self):
-        """return a ngram list of tuples
-
-        :return: list of tuples
-        :rtype: list
-        """
         return list(self.ngram_list)
 
 
